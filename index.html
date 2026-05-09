@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PadelShare - שוק הפאדל של ישראל</title>
     <style>
-        /* הגדרות צבעים וסגנון כללי */
         :root {
             --primary-blue: #003366;
             --whatsapp-green: #25D366;
@@ -18,14 +17,15 @@
             margin: 0;
             background-color: var(--light-gray);
             color: var(--text-dark);
+            scroll-behavior: smooth;
         }
 
-        /* תפריט עליון 🧭 */
+        /* תפריט עליון */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
+            padding: 15px 20px;
             background-color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
@@ -33,7 +33,174 @@
             z-index: 1000;
         }
 
-        .logo {
+        .logo { font-size: 1.3rem; font-weight: bold; color: var(--primary-blue); }
+
+        .post-ad-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), 
+                        url('https://images.unsplash.com/photo-1626224580175-340ad0e3a766?auto=format&fit=crop&w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        /* קטלוג */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .product-image { height: 150px; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 10px; }
+
+        /* טופס פרסום מודעה */
+        .post-ad-section {
+            background: white;
+            padding: 40px 20px;
+            margin: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+
+        .post-ad-section h2 { text-align: center; color: var(--primary-blue); margin-bottom: 25px; }
+
+        .form-group { margin-bottom: 15px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            background-color: var(--whatsapp-green);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        footer { background: var(--primary-blue); color: white; padding: 30px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">PadelShare 🎾</div>
+        <a href="#post-ad-form" class="post-ad-btn">פרסם מודעה +</a>
+    </nav>
+
+    <section class="hero">
+        <h1>שוק הפאדל של ישראל 🤝</h1>
+        <p>קונים ומוכרים ציוד מקצועי בקליק</p>
+    </section>
+
+    <section id="catalog" class="product-grid">
+        <div class="product-card">
+            <div class="product-image">🏸</div>
+            <h3>Babolat Viper</h3>
+            <p>מחיר: ₪850 | מצב: מעולה</p>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🎒</div>
+            <h3>תיק Bullpadel</h3>
+            <p>מחיר: ₪200 | מצב: חדש</p>
+        </div>
+    </section>
+
+    <section id="post-ad-form" class="post-ad-section">
+        <h2>פרסום מודעה חדשה 🏷️</h2>
+        <form id="padel-form">
+            <div class="form-group">
+                <label>דגם המוצר</label>
+                <input type="text" id="p-name" placeholder="למשל: מחבט Nox AT10" required>
+            </div>
+            
+            <div class="form-group">
+                <label>מצב המוצר</label>
+                <select id="p-status" required>
+                    <option value="">בחר מצב...</option>
+                    <option value="חדש בניילון">חדש בניילון</option>
+                    <option value="כמו חדש">כמו חדש</option>
+                    <option value="משומש">משומש</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>מחיר (₪)</label>
+                <input type="number" id="p-price" placeholder="כמה תרצו עליו?" required>
+            </div>
+
+            <div class="form-group">
+                <label>עיר / אזור איסוף</label>
+                <input type="text" id="p-location" placeholder="למשל: תל אביב / הרצליה">
+            </div>
+
+            <button type="submit" class="submit-btn">שלח לפרסום בוואטסאפ 📱</button>
+        </form>
+    </section>
+
+    <footer><p>PadelShare 2026</p></footer>
+
+    <script>
+        document.getElementById('padel-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // מונע מהדף להתרענן
+            
+            // איסוף הנתונים מהשדות
+            const name = document.getElementById('p-name').value;
+            const status = document.getElementById('p-status').value;
+            const price = document.getElementById('p-price').value;
+            const location = document.getElementById('p-location').value;
+            
+            // בניית הודעת הוואטסאפ
+            const message = `היי, אני רוצה לפרסם מודעה חדשה ב-PadelShare:
+🎾 מוצר: ${name}
+✨ מצב: ${status}
+💰 מחיר מבוקש: ₪${price}
+📍 מיקום: ${location}
+(מצרף תמונה מיד...)`;
+
+            // פתיחת וואטסאפ עם ההודעה המוכנה
+            const phoneNumber = "972542929635";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+
+</body>
+</html>
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-blue);
